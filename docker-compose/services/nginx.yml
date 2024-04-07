@@ -8,6 +8,10 @@ services:
       - 'host.docker.internal:host-gateway'
     volumes:
       - "../proxy:/etc/nginx/templates"
+      - "/etc/letsencrypt/live/testnet.racescan.io/fullchain.pem:/etc/letsencrypt/live/testnet.racescan.io/fullchain.pem"
+      - "/etc/letsencrypt/live/testnet.racescan.io/privkey.pem:/etc/letsencrypt/live/testnet.racescan.io/privkey.pem"
+      - "/etc/letsencrypt/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf"
+      - "/etc/letsencrypt/ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem"
     environment:
       BACK_PROXY_PASS: ${BACK_PROXY_PASS:-http://backend:4000}
       FRONT_PROXY_PASS: ${FRONT_PROXY_PASS:-http://frontend:3000}
